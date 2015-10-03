@@ -15,6 +15,7 @@ module TsvBuddy
         one_record[tsv_table.headers[i]] = col
       end
     end
+    true
   end
 
   # to_tsv: converts @data into tsv string

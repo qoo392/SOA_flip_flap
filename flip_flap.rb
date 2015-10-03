@@ -1,7 +1,7 @@
 require_relative 'tsv_buddy'
-
 class FlipFlap
-
-  #
-
-end
+    include TsvBuddy
+    def initialize
+        @data = nil
+    end  
+end  
