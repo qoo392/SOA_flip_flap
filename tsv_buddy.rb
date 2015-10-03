@@ -10,17 +10,21 @@ module TsvBuddy
   def take_tsv(tsv)
     tsv_table = CSV.parse(tsv, col_sep: "\t", headers: true)
     @data = tsv_table.map do |row|
-      one_record = {}
-      row.each_with_index do |col, i|
-        one_record[tsv_table.headers[i]] = col
-      end
+      row.to_h
     end
-    true
   end
 
   # to_tsv: converts @data into tsv string
   # returns: String in TSV format
   def to_tsv
-
+    #title
+    str = @data[0].keys.reduce(""){ |tmp, item| tmp = tmp + item + "\t" }
+    str = str[0..-2] + "\n" #del redundant \t and add line
+    
+    # ouput data
+    str = @data.reduce(str) do |tmp ,item|
+      new_line = item.values.reduce("") { |line, ele| line = line + ele + "\t" }
+      tmp = tmp + new_line[0..-2] + "\n"
+    end
   end
 end
